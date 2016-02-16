@@ -5,9 +5,9 @@ package fathersfarm;
  * Component.java
  *
  * Adds logic or graphics to an instance
-*/
+ */
 public abstract class Component extends Updatable {
-    
+
     private Instance parent = null;
 
 

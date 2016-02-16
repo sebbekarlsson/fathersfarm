@@ -35,7 +35,7 @@ public class Main extends Updatable {
     public Main() throws LWJGLException {
         this.initialize();
         this.initializeGraphics();
-        
+
         ArrayList<String> errors = this.checkEnvironment();
         if (errors.size() > 0) {
             for (int i = 0; i < errors.size(); i++) {
@@ -73,7 +73,7 @@ public class Main extends Updatable {
             GL11.glClear(GL11.GL_COLOR_BUFFER_BIT | GL11.GL_DEPTH_BUFFER_BIT);
             GL11.glClearColor(255/255f, 255/255f, 255/255f, 1);
             GL11.glColor3f(0, 0 ,0);
-            
+
             this.tick(1);
             this.draw(1);
 
@@ -102,7 +102,7 @@ public class Main extends Updatable {
     /**
      * This function is called once and checks for erros before we load the
      * game loop.
-    */
+     */
     private ArrayList<String> checkEnvironment() {
         ArrayList<String> errors = new ArrayList<String>();
 
@@ -116,7 +116,7 @@ public class Main extends Updatable {
 
     /**
      * Updates game logick.
-    */
+     */
     @Override
     public void tick(int delta) {
         getCurrentScene().tick(delta);
@@ -125,7 +125,7 @@ public class Main extends Updatable {
 
     /**
      * Updates game graphics.
-    */
+     */
     @Override
     public void draw(int delta) {
         getCurrentScene().draw(delta);
@@ -136,7 +136,7 @@ public class Main extends Updatable {
      * Used to get the current scene.
      *
      * @return Scene instance of Scene.
-    */
+     */
     public static Scene getCurrentScene() {
         return scenes.get(SCENE_INDEX);
     }
