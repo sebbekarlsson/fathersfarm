@@ -10,10 +10,17 @@ import java.util.ArrayList;
  */
 public abstract class Instance extends Updatable {
 
-    public float x, y = 0f;
+    public float x, y, depth = 0f;
     public float dx, dy = 0f;
 
+    public Sprite sprite = new Sprite();
     private ArrayList<Component> components = new ArrayList<Component>();
+
+    
+    public Instance(float x, float y) {
+        this.x = x;
+        this.y = y;
+    }
 
 
     /**
@@ -29,20 +36,38 @@ public abstract class Instance extends Updatable {
 
 
     /**
-     * Ticking and drawing all components by default.
+     * Ticking all components by default.
      */ 
-    public void tick() {
-        this.tickComponents();
-        this.drawComponents();
+    @Override
+    public void tick(int delta) {
+        this.sprite.tick(delta);
+        this.tickComponents(delta);
+    }
+
+
+    /**
+     * Drawing all components by default.
+     */ 
+    @Override
+    public void draw(int delta) {
+        this.sprite.draw(delta);
+        this.drawComponents(delta);
     }
 
 
     /**
      * Sends a tick signal to all components for this instance.
      */ 
-    public void tickComponents() {
+    public void tickComponents(int delta) {
         for (int i = 0; i < this.components.size(); i++) {
-            this.components.get(i).tick(1);
+            Component component = this.components.get(i);
+
+            if (!component.hasBeenInitialized) {
+                component.init(delta);
+                component.hasBeenInitialized = true;
+            } else {
+                this.components.get(i).tick(delta);
+            }
         }
     }
 
@@ -50,9 +75,20 @@ public abstract class Instance extends Updatable {
     /**
      * Sends a draw signal to all components for this instance.
      */
-    public void drawComponents() {
+    public void drawComponents(int delta) {
         for (int i = 0; i < this.components.size(); i++) {
-            this.components.get(i).draw(1);
+            this.components.get(i).draw(delta);
         }
+    }
+
+
+    public Component getComponent(String name) {
+        for (int i = 0; i < components.size(); i++) {
+            if (components.get(i).getName() == name) {
+                return components.get(i);
+            }
+        }
+
+        return null;
     }
 }

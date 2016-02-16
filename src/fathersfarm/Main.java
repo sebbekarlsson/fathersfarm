@@ -10,6 +10,8 @@ import java.util.ArrayList;
 
 import javax.swing.JOptionPane;
 
+import fathersfarm.scenes.FarmScene;
+
 
 /**
  * The main class for the application.
@@ -28,13 +30,16 @@ public class Main extends Updatable {
     public static ArrayList<Scene> scenes = new ArrayList<Scene>();
     public static int SCENE_INDEX = 0;
 
-
     /**
      * Main calls for the application.
      */
     public Main() throws LWJGLException {
         this.initialize();
         this.initializeGraphics();
+
+        TextureBank.loadTextures("static/image");
+
+        scenes.add(new FarmScene());
 
         ArrayList<String> errors = this.checkEnvironment();
         if (errors.size() > 0) {
@@ -72,11 +77,14 @@ public class Main extends Updatable {
         while (!Display.isCloseRequested()) {
             GL11.glClear(GL11.GL_COLOR_BUFFER_BIT | GL11.GL_DEPTH_BUFFER_BIT);
             GL11.glClearColor(255/255f, 255/255f, 255/255f, 1);
-            GL11.glColor3f(0, 0 ,0);
-
+            GL11.glColor3f(255/255f, 255/255f, 255/255f);
+            
+            GL11.glPushMatrix();
             this.tick(1);
             this.draw(1);
+            GL11.glPopMatrix();
 
+            Display.sync(60);
             Display.update();
         }
         System.exit(0);
@@ -119,7 +127,13 @@ public class Main extends Updatable {
      */
     @Override
     public void tick(int delta) {
-        getCurrentScene().tick(delta);
+        Scene scene = getCurrentScene();
+        if(!scene.hasBeenInitialized) {
+            scene.init(delta);
+            scene.hasBeenInitialized = true;
+        } else {
+            getCurrentScene().tick(delta);
+        }
     }
 
 
@@ -130,6 +144,10 @@ public class Main extends Updatable {
     public void draw(int delta) {
         getCurrentScene().draw(delta);
     }
+
+
+    @Override
+    public void init(int delta) {}
 
 
     /**
