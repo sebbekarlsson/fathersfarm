@@ -1,0 +1,10 @@
+{
+    "libraries":[
+        "lib/jar/*",
+        "lib/native/linux"
+    ],
+    "class": "fathersfarm.Main",
+    "D": [
+        {"java.library.path": "lib/native/linux"}
+    ]
+}
