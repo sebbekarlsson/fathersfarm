@@ -3,12 +3,14 @@ package fathersfarm.instances;
 import fathersfarm.Instance;
 import fathersfarm.TextureBank;
 import fathersfarm.components.SelectableComponent;
+import fathersfarm.components.PlantHandlerComponent;
 import fathersfarm.types.GroundTileType;
 
 
 public class GroundTile extends Instance {
 
     private GroundTileType type = GroundTileType.GRASS;
+    public Instance item = null;
 
     public GroundTile(float x, float y, GroundTileType type) {
         super(x, y);
@@ -20,6 +22,14 @@ public class GroundTile extends Instance {
     @Override
     public void init(int delta) {
         addComponent(new SelectableComponent(this, "SelectableComponent"));
+        addComponent(new PlantHandlerComponent(this, "PlantHandlerComponent"));
+    }
+
+
+    @Override
+    public void draw(int delta) {
+        this.sprite.draw(delta);
+        this.drawComponents(delta);
     }
 
     public void setType(GroundTileType type) {
