@@ -10,6 +10,11 @@ public class SelectableComponent extends Component {
 
     public boolean selected = false;
 
+    private float animationTime = 255f;
+    private float animationTimer = animationTime;
+    private float brightness = 0f;
+    private boolean animateUp = false;
+    private float animationSpeed = 9f;
 
     public SelectableComponent(Instance parent, String name) {
         super(parent, name);
@@ -21,13 +26,32 @@ public class SelectableComponent extends Component {
         float x = getParent().x;
         float y = getParent().y;
 
+
+        if (animateUp == true && animationTimer <= animationTime) {
+            animationTimer += animationSpeed;
+
+            if (animationTimer == animationTime) {
+                animateUp = false;
+            }
+        } else {
+            animateUp = false;
+            animationTimer -= animationSpeed;
+
+            if (animationTimer <= 0){
+                animateUp = true;
+            }
+        } 
+
+        brightness = animationTimer;
+
+
         if (this.selected) {
             GL11.glDisable(GL11.GL_TEXTURE_2D);
 
-            GL11.glColor3f(255/255f, 0/255f, 0/255f);
+            GL11.glColor4f(brightness/255f, brightness/255f, brightness/255f, 0.5f);
             GL11.glTranslatef(0, 0, 1);
-            GL11.glBegin(GL11.GL_LINE_LOOP);
-                
+            GL11.glBegin(GL11.GL_QUADS);
+
             GL11.glVertex2f(0, 0);
             GL11.glVertex2f(32, 0);
             GL11.glVertex2f(32, 32);
