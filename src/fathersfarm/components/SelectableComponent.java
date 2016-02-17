@@ -40,6 +40,8 @@ public class SelectableComponent extends Component {
 
         brightness = animationTimer;
 
+        float width = this.getParent().width;
+        float height = this.getParent().height;
 
         if (this.selected) {
             GL11.glDisable(GL11.GL_TEXTURE_2D);
@@ -49,9 +51,9 @@ public class SelectableComponent extends Component {
             GL11.glBegin(GL11.GL_QUADS);
 
             GL11.glVertex2f(0, 0);
-            GL11.glVertex2f(32, 0);
-            GL11.glVertex2f(32, 32);
-            GL11.glVertex2f(0, 32);
+            GL11.glVertex2f(width, 0);
+            GL11.glVertex2f(width, height);
+            GL11.glVertex2f(0, height);
 
             GL11.glEnd();
             GL11.glTranslatef(0, 0, -1);

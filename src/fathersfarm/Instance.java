@@ -12,6 +12,7 @@ public abstract class Instance extends Updatable {
 
     public float x, y, depth = 0f;
     public float dx, dy = 0f;
+    public float width, height = 0f;
 
     public Sprite sprite = new Sprite();
     private ArrayList<Component> components = new ArrayList<Component>();
@@ -90,5 +91,11 @@ public abstract class Instance extends Updatable {
         }
 
         return null;
+    }
+
+
+    public void setSize(float width, float height) {
+        this.width = width;
+        this.height = height;
     }
 }

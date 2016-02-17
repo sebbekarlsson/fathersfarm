@@ -14,13 +14,12 @@ public class GroundTile extends Instance {
         super(x, y);
 
         setType(type);
+        setSize(32, 32);
     }
 
     @Override
     public void init(int delta) {
         addComponent(new SelectableComponent(this, "SelectableComponent"));
-
-        System.out.println(getComponent("SelectableComponent"));
     }
 
     public void setType(GroundTileType type) {

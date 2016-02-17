@@ -65,7 +65,6 @@ public class TextureBank {
      * @return desired texture.
      */
     public static Texture getTexture(String name){
-        System.out.println("Selected texure:" + name);
         return textures.get(name);
     }
 }
