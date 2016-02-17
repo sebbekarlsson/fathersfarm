@@ -3,6 +3,7 @@ package fathersfarm.scenes;
 import fathersfarm.Scene;
 import fathersfarm.instances.GroundTile;
 import fathersfarm.components.SelectableComponent;
+import fathersfarm.types.GroundTileType;
 
 import org.lwjgl.input.*;
 
@@ -18,7 +19,7 @@ public class FarmScene extends Scene {
     public void init(int delta) {
         for (int x = 0; x < tiles.length; x++) {
             for (int y = 0; y < tiles[x].length; y++) {
-                tiles[x][y] = new GroundTile(x * 32, y * 32);
+                tiles[x][y] = new GroundTile(x * 32, y * 32, GroundTileType.GRASS);
                 this.instances.add(tiles[x][y]);
             }
         }
@@ -110,6 +111,9 @@ public class FarmScene extends Scene {
                     tiley++;
                 }
             }
+        }
+        if (Keyboard.isKeyDown(Keyboard.KEY_Z)) {
+            tile.setType(GroundTileType.SOIL);
         }
     }
 

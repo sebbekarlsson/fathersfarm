@@ -3,14 +3,17 @@ package fathersfarm.instances;
 import fathersfarm.Instance;
 import fathersfarm.TextureBank;
 import fathersfarm.components.SelectableComponent;
+import fathersfarm.types.GroundTileType;
 
 
 public class GroundTile extends Instance {
 
-    public GroundTile(float x, float y) {
+    private GroundTileType type = GroundTileType.GRASS;
+
+    public GroundTile(float x, float y, GroundTileType type) {
         super(x, y);
 
-        this.sprite.textures.add(TextureBank.getTexture("grass.jpg"));
+        setType(type);
     }
 
     @Override
@@ -18,5 +21,16 @@ public class GroundTile extends Instance {
         addComponent(new SelectableComponent(this, "SelectableComponent"));
 
         System.out.println(getComponent("SelectableComponent"));
+    }
+
+    public void setType(GroundTileType type) {
+        this.type = type;
+        this.sprite.textures.clear();
+        this.sprite.textures.add(TextureBank.getTexture(type.texture));
+    }
+
+
+    public GroundTileType getType() {
+        return this.type;
     }
 }

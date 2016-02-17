@@ -31,11 +31,13 @@ public class Sprite extends Updatable {
 
 
     public void drawTexture(int delta, float x, float y) {
+        GL11.glPushMatrix();
         Texture texture = this.getCurrentTexture();
 
         if (texture == null) { return; }
         
-        GL11.glPushMatrix();
+        
+        texture.bind();
         GL11.glBegin(GL11.GL_QUADS);
 
         GL11.glTexCoord2f(0, 0);
