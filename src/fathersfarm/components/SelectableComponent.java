@@ -23,10 +23,6 @@ public class SelectableComponent extends Component {
 
     @Override
     public void draw(int delta) {
-        float x = getParent().x;
-        float y = getParent().y;
-
-
         if (animateUp == true && animationTimer <= animationTime) {
             animationTimer += animationSpeed;
 
