@@ -1,6 +1,7 @@
 package fathersfarm;
 
 import java.util.ArrayList;
+import org.lwjgl.opengl.GL11;
 
 
 /**
@@ -52,7 +53,6 @@ public abstract class Instance extends Updatable {
     @Override
     public void draw(int delta) {
         this.sprite.draw(delta);
-        this.drawComponents(delta);
     }
 
 
@@ -78,7 +78,9 @@ public abstract class Instance extends Updatable {
      */
     public void drawComponents(int delta) {
         for (int i = 0; i < this.components.size(); i++) {
+            GL11.glPushMatrix();
             this.components.get(i).draw(delta);
+            GL11.glPopMatrix();
         }
     }
 

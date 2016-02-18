@@ -97,7 +97,7 @@ public class Main extends Updatable {
     private void initializeGraphics(){
         GL11.glMatrixMode(GL11.GL_PROJECTION);
         GL11.glLoadIdentity();
-        GL11.glOrtho(0, Display.getWidth(), Display.getHeight(), 0,-1f,1000 );
+        GL11.glOrtho(0, Display.getWidth(), Display.getHeight(), 0, 100f,-1000f);
         GL11.glMatrixMode(GL11.GL_MODELVIEW);
         GL11.glLoadIdentity();
         GL11.glEnable(GL11.GL_TEXTURE_2D);
@@ -142,7 +142,17 @@ public class Main extends Updatable {
      */
     @Override
     public void draw(int delta) {
+        Camera camera = getCurrentScene().camera;
+
+        GL11.glPushMatrix();
+        GL11.glTranslatef(camera.x, camera.y, camera.depth);
         getCurrentScene().draw(delta);
+        GL11.glPopMatrix();
+
+        GL11.glPushMatrix();
+        GL11.glTranslatef(0, 0, -99f);
+        getCurrentScene().drawGUI(delta);
+        GL11.glPopMatrix();
     }
 
 

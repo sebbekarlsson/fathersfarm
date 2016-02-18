@@ -15,6 +15,7 @@ public class SelectableComponent extends Component {
     private float brightness = 0f;
     private boolean animateUp = false;
     private float animationSpeed = 9f;
+    
 
     public SelectableComponent(Instance parent, String name) {
         super(parent, name);
@@ -44,10 +45,11 @@ public class SelectableComponent extends Component {
         float height = this.getParent().height;
 
         if (this.selected) {
+            GL11.glPushMatrix();
             GL11.glDisable(GL11.GL_TEXTURE_2D);
 
             GL11.glColor4f(brightness/255f, brightness/255f, brightness/255f, 0.5f);
-            GL11.glTranslatef(0, 0, 1);
+            GL11.glTranslatef(getParent().x, getParent().y, -1f);
             GL11.glBegin(GL11.GL_QUADS);
 
             GL11.glVertex2f(0, 0);
@@ -59,6 +61,7 @@ public class SelectableComponent extends Component {
             GL11.glTranslatef(0, 0, -1);
             GL11.glColor3f(255/255f, 255/255f, 255/255f);
             GL11.glEnable(GL11.GL_TEXTURE_2D);
+            GL11.glPopMatrix();
         }
     }
 

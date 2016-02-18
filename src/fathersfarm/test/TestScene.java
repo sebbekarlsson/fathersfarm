@@ -10,4 +10,8 @@ public class TestScene extends Scene {
         this.instances.add(new TestInstance(120f, 120f));
     }
 
+
+    @Override
+    public void drawGUI(int delta) {}
+
 }

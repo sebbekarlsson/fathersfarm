@@ -1,11 +1,18 @@
 package fathersfarm.scenes;
 
 import fathersfarm.Scene;
-import fathersfarm.instances.GroundTile;
+import fathersfarm.instances.*;
 import fathersfarm.components.SelectableComponent;
-import fathersfarm.types.GroundTileType;
+import fathersfarm.types.*;
 
 import org.lwjgl.input.*;
+
+import org.newdawn.slick.TrueTypeFont;
+import java.awt.Font;
+import org.newdawn.slick.Color;
+
+import org.lwjgl.opengl.*;
+
 
 public class FarmScene extends Scene {
 
@@ -14,6 +21,14 @@ public class FarmScene extends Scene {
     public int tiley = 0;
     public float keydowntime = 20f;
     public float keydowntimer = keydowntime;
+
+    public PlantType[] plantTypes = PlantType.values();
+    public int plantTypeIndex = 0;
+    
+    public Font awtFont = new Font("Times New Roman", Font.BOLD, 12);
+    public TrueTypeFont font = new TrueTypeFont(awtFont, false);
+
+
 
     @Override
     public void init(int delta) {
@@ -24,6 +39,13 @@ public class FarmScene extends Scene {
             }
         }
     }
+
+
+    @Override
+    public void drawGUI(int delta) {
+        this.font.drawString(Display.getWidth()-256, Display.getHeight()-16, plantTypes[plantTypeIndex].name(), Color.black);
+    }
+
 
     @Override
     public void tick(int delta) {
@@ -73,6 +95,15 @@ public class FarmScene extends Scene {
                     keydowntimer = keydowntime;
                 }
             }
+            if (Keyboard.getEventKey() == Keyboard.KEY_V) {
+                if (Keyboard.getEventKeyState()) {
+                    if (plantTypeIndex < plantTypes.length -1) {
+                        plantTypeIndex ++;
+                    } else {
+                        plantTypeIndex = 0;
+                    }
+                }
+            }
         }
 
         if (Keyboard.isKeyDown(Keyboard.KEY_RIGHT)) {
@@ -114,6 +145,15 @@ public class FarmScene extends Scene {
         }
         if (Keyboard.isKeyDown(Keyboard.KEY_Z)) {
             tile.setType(GroundTileType.SOIL);
+        }
+        if (Keyboard.isKeyDown(Keyboard.KEY_X)) {
+            tile.setType(GroundTileType.GRASS);
+        }
+        if (Keyboard.isKeyDown(Keyboard.KEY_C)) {
+            Plant plant = new Plant(tile.x, tile.y, plantTypes[plantTypeIndex]);
+
+            if (tile.getType() == GroundTileType.SOIL)
+            tile.item = plant;
         }
     }
 

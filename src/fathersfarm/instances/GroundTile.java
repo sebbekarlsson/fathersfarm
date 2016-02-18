@@ -17,20 +17,13 @@ public class GroundTile extends Instance {
 
         setType(type);
         setSize(32, 32);
-    }
-
-    @Override
-    public void init(int delta) {
         addComponent(new SelectableComponent(this, "SelectableComponent"));
         addComponent(new PlantHandlerComponent(this, "PlantHandlerComponent"));
     }
 
-
     @Override
-    public void draw(int delta) {
-        this.sprite.draw(delta);
-        this.drawComponents(delta);
-    }
+    public void init(int delta) {}
+
 
     public void setType(GroundTileType type) {
         this.type = type;
