@@ -21,8 +21,8 @@ public class PlantHandlerComponent extends Component {
         if (this.getParent() instanceof GroundTile) {
             GroundTile tile = (GroundTile) this.getParent();
 
-            if (tile.item instanceof Plant) {
-                Plant plant = (Plant) tile.item;
+            if (tile.getItem() instanceof Plant) {
+                Plant plant = (Plant) tile.getItem();
                 GL11.glPushMatrix();
                 GL11.glTranslatef(getParent().x, getParent().y, -5f);
                 plant.draw(delta);
@@ -37,11 +37,11 @@ public class PlantHandlerComponent extends Component {
         if (this.getParent() instanceof GroundTile) {
             GroundTile tile = (GroundTile) this.getParent();
 
-            if (tile.item instanceof Plant) {
-                Plant plant = (Plant) tile.item;
+            if (tile.getItem() instanceof Plant) {
+                Plant plant = (Plant) tile.getItem();
 
                 if (tile.getType() != GroundTileType.SOIL) {
-                    tile.item = null;
+                    tile.setItem(null);
                 }
             }
         }

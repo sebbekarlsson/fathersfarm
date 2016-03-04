@@ -10,7 +10,7 @@ import fathersfarm.types.GroundTileType;
 public class GroundTile extends Instance {
 
     private GroundTileType type = GroundTileType.GRASS;
-    public Instance item = null;
+    private Instance item = null;
 
     public GroundTile(float x, float y, GroundTileType type) {
         super(x, y);
@@ -34,5 +34,15 @@ public class GroundTile extends Instance {
 
     public GroundTileType getType() {
         return this.type;
+    }
+
+
+    public void setItem(Instance item) {
+        this.item = item;
+    }
+
+
+    public Instance getItem() {
+        return this.item;
     }
 }

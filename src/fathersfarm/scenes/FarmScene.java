@@ -95,7 +95,7 @@ public class FarmScene extends Scene {
                     keydowntimer = keydowntime;
                 }
             }
-            if (Keyboard.getEventKey() == Keyboard.KEY_V) {
+            if (Keyboard.getEventKey() == Keyboard.KEY_C) {
                 if (Keyboard.getEventKeyState()) {
                     if (plantTypeIndex < plantTypes.length -1) {
                         plantTypeIndex ++;
@@ -149,11 +149,11 @@ public class FarmScene extends Scene {
         if (Keyboard.isKeyDown(Keyboard.KEY_X)) {
             tile.setType(GroundTileType.GRASS);
         }
-        if (Keyboard.isKeyDown(Keyboard.KEY_C)) {
+        if (Keyboard.isKeyDown(Keyboard.KEY_SPACE)) {
             Plant plant = new Plant(tile.x, tile.y, plantTypes[plantTypeIndex]);
 
             if (tile.getType() == GroundTileType.SOIL)
-            tile.item = plant;
+            tile.setItem(plant);
         }
     }
 
